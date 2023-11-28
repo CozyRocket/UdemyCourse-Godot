@@ -1,6 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bii8rqswvlkqi"]
+[gd_scene load_steps=9 format=3 uid="uid://bii8rqswvlkqi"]
 
 [ext_resource type="Script" path="res://scenes/ui/end_screen.gd" id="1_5sb3k"]
+[ext_resource type="PackedScene" uid="uid://crejrtfhhhrt" path="res://scenes/ui/sound_button.tscn" id="2_tsj5s"]
+[ext_resource type="AudioStream" uid="uid://dkitbvkyflxe8" path="res://assets/audio/jingles_victory.ogg" id="2_ynvbg"]
+[ext_resource type="AudioStream" uid="uid://cu3uyyh4sa6ui" path="res://assets/audio/jingles_defeat.ogg" id="3_ngvmn"]
+
+[sub_resource type="Animation" id="Animation_vml22"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_jew4k"]
 resource_name = "in"
@@ -17,21 +35,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_vml22"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_cbf0q"]
@@ -67,6 +70,16 @@ autoplay = "in"
 libraries = {
 "": SubResource("AnimationLibrary_870a5")
 }
+
+[node name="VictoryStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ynvbg")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="DefeatStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ngvmn")
+volume_db = -5.0
+bus = &"sfx"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -127,12 +140,12 @@ text = "You Won!"
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="RestartButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_tsj5s")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Restart"
+text = "Continue"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="QuitButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_tsj5s")]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Quit"
+text = "Quit to menu"

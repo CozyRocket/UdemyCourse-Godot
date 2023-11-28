@@ -10,3 +10,10 @@ func _process(delta):
 	var move_sign = sign(velocity.x)
 	if move_sign != 0:
 		visuals.scale = Vector2(-move_sign,1)
+
+func _ready():
+	$HurtboxComponent.hit.connect(on_hit)
+
+
+func on_hit():
+	$HitRandomAudioComponent.play_random()

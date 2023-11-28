@@ -11,13 +11,24 @@ config_version=5
 [application]
 
 config/name="Udemy-2DSurvivorsCourse"
-run/main_scene="res://scenes/main/main.tscn"
+run/main_scene="res://scenes/ui/main_menu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="2DSurvivorCourse"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.380392, 0.168627, 0.160784, 1)
+boot_splash/image="res://icon.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
+boot_splash/minimum_display_time=500
 
 [autoload]
 
 GameEvents="*res://scenes/autoload/game_events.tscn"
+MusicPlayer="*res://scenes/autoload/music_player.tscn"
+ScreenTransition="*res://scenes/autoload/screen_transition.tscn"
+MetaProgression="*res://scenes/autoload/meta_progression.tscn"
 
 [debug]
 
@@ -27,9 +38,11 @@ gdscript/warnings/unused_parameter=0
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/window_width_override=2560
 window/size/window_height_override=1440
 window/stretch/mode="viewport"
+window/size/mode.debug=0
 
 [gui]
 
@@ -64,6 +77,11 @@ move_down={
 left_click={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(234, 43),"global_position":Vector2(242, 127),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 

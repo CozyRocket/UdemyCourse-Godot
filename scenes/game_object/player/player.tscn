@@ -1,10 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bknymets75v2w"]
+[gd_scene load_steps=18 format=3 uid="uid://bknymets75v2w"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_6ygxi"]
 [ext_resource type="PackedScene" uid="uid://drsun020sv4pw" path="res://scenes/component/velocity_component.tscn" id="2_33gct"]
 [ext_resource type="Texture2D" uid="uid://csu7rednk8k2p" path="res://scenes/game_object/player/player.png" id="2_411kh"]
 [ext_resource type="PackedScene" uid="uid://dd8clvdkrxq4m" path="res://scenes/component/health_component.tscn" id="2_eb136"]
 [ext_resource type="PackedScene" uid="uid://di62pi7uv41ug" path="res://scenes/ability/sword_ability_controller/sword_ability_controller.tscn" id="2_wmusr"]
+[ext_resource type="PackedScene" uid="uid://5esnmqya8xev" path="res://scenes/component/random_audio_stream_player_2d_component.tscn" id="4_kpqcw"]
+[ext_resource type="AudioStream" uid="uid://c74k45cut6tpr" path="res://assets/audio/impactGlass_medium_000.ogg" id="5_uar82"]
+[ext_resource type="AudioStream" uid="uid://4cs4drqf4m0d" path="res://assets/audio/impactGlass_medium_001.ogg" id="6_0g8eh"]
+[ext_resource type="AudioStream" uid="uid://cifkeclvud6en" path="res://assets/audio/impactGlass_medium_002.ogg" id="7_c2uua"]
+[ext_resource type="AudioStream" uid="uid://qba3hyxgbukn" path="res://assets/audio/impactGlass_medium_003.ogg" id="8_3d324"]
+[ext_resource type="AudioStream" uid="uid://crp4vm7aakgoc" path="res://assets/audio/impactGlass_medium_004.ogg" id="9_u14rl"]
 
 [sub_resource type="Animation" id="Animation_iyp4q"]
 length = 0.001
@@ -116,6 +122,9 @@ max_speed = 90
 acceleration = 25.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_eb136")]
+
+[node name="RandomAudioStreamPlayer2DComponent" parent="." instance=ExtResource("4_kpqcw")]
+streams = Array[AudioStream]([ExtResource("5_uar82"), ExtResource("6_0g8eh"), ExtResource("7_c2uua"), ExtResource("8_3d324"), ExtResource("9_u14rl")])
 
 [node name="Abilities" type="Node" parent="."]
 

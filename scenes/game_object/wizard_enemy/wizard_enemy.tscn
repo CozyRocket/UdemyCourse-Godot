@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvhxrxdj7t05v"]
+[gd_scene load_steps=22 format=3 uid="uid://dvhxrxdj7t05v"]
 
 [ext_resource type="Script" path="res://scenes/game_object/wizard_enemy/wizard_enemy.gd" id="1_bhfvv"]
 [ext_resource type="PackedScene" uid="uid://dd8clvdkrxq4m" path="res://scenes/component/health_component.tscn" id="1_lwqc1"]
@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://cv3c0x5at676t" path="res://scenes/component/vial_drop_component.tscn" id="4_ucm31"]
 [ext_resource type="PackedScene" uid="uid://b3mpaijqs8vgf" path="res://scenes/component/hit_flash_component.tscn" id="5_7y8xt"]
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_44t30"]
+[ext_resource type="PackedScene" uid="uid://5esnmqya8xev" path="res://scenes/component/random_audio_stream_player_2d_component.tscn" id="8_61slp"]
+[ext_resource type="AudioStream" uid="uid://covamcesfbvhh" path="res://assets/audio/footstep_carpet_000.ogg" id="9_dp7bm"]
+[ext_resource type="AudioStream" uid="uid://bcl3nfm8lwaqa" path="res://assets/audio/footstep_carpet_001.ogg" id="10_gs82n"]
+[ext_resource type="AudioStream" uid="uid://cyjfs3n3mtq80" path="res://assets/audio/footstep_carpet_002.ogg" id="11_m6yrp"]
+[ext_resource type="AudioStream" uid="uid://cgwlpepji4e8o" path="res://assets/audio/footstep_carpet_003.ogg" id="12_f0lvd"]
+[ext_resource type="AudioStream" uid="uid://dhc34xxvadkun" path="res://assets/audio/footstep_carpet_004.ogg" id="13_0rn32"]
 
 [sub_resource type="Animation" id="Animation_6iwsd"]
 length = 0.001
@@ -36,18 +42,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Sprite2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_p7r4k"]
 resource_name = "walk"
@@ -61,10 +55,10 @@ tracks/0/path = NodePath("Visuals/Sprite2D:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(2.08165e-12, -3), Vector2(3, 3)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -74,38 +68,9 @@ tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1.7411, 2.46229, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [3.48787e-16, -0.174533, 0.261799]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/Sprite2D:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 2.82843, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.5, 0.8), Vector2(0.9, 1.1)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.05, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [true],
-"method": &"set_is_moving"
-}, {
-"args": [false],
-"method": &"set_is_moving"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3jcn1"]
@@ -114,7 +79,7 @@ _data = {
 "walk": SubResource("Animation_p7r4k")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1tjn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovwve"]
 resource_local_to_scene = true
 shader = ExtResource("6_44t30")
 shader_parameter/lerp_percent = 0.0
@@ -137,7 +102,7 @@ libraries = {
 }
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_lwqc1")]
-max_health = 30.0
+max_health = 20.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_nb1vp")]
 max_speed = 60
@@ -149,11 +114,14 @@ health_component = NodePath("../HealthComponent")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_7y8xt")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_m1tjn")
+hit_flash_material = SubResource("ShaderMaterial_ovwve")
 
 [node name="DeathComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("2_57mpn")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Visuals/Sprite2D")
+
+[node name="HitRandomAudioComponent" parent="." instance=ExtResource("8_61slp")]
+streams = Array[AudioStream]([ExtResource("9_dp7bm"), ExtResource("10_gs82n"), ExtResource("11_m6yrp"), ExtResource("12_f0lvd"), ExtResource("13_0rn32")])
 
 [node name="Visuals" type="Node2D" parent="."]
 
